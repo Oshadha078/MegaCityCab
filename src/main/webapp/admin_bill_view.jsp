@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,7 +108,7 @@
     <a class="navbar-brand" href="#">Admin Dashboard</a>
     <ul class="navbar-nav ms-auto">
       <li class="nav-item">
-        <a class="nav-link" href="Login.html">Logout</a>
+        <a class="nav-link" href="Login.jsp">Logout</a>
       </li>
     </ul>
   </nav>
@@ -117,9 +119,9 @@
       <div class="col-md-2 sidebar">
         <h5 class="text-center">Menu</h5>
         <a href="#">Dashboard</a>
-        <a href="usersmanage.html">Users</a>
-        <a href="managevehicles.html">Vehicles</a>
-        <a href="adminBillView.html">Bill Manage</a>
+        <a href="user_manage.jsp">Users</a>
+        <a href="manage_vehicles.jsp">Vehicles</a>
+        <a href="admin_bill_view.jsp">Bill Manage</a>
         <a href="#">Support</a>
       </div>
       <!-- Main Content -->
@@ -217,5 +219,8 @@
 
   <!-- Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
 </body>
 </html>

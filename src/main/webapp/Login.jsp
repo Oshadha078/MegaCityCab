@@ -125,7 +125,7 @@
       </form>
 
       <p class="text-center mt-3">
-        <a href="signup.html">Create an account</a>
+        <a href="signup.jsp">Create an account</a>
       </p>
     </div>
   </div>

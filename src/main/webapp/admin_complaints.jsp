@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -112,11 +114,11 @@
     <div class="row">
       <div class="col-md-2 sidebar">
         <h5 class="text-center text-light">Menu</h5>
-        <a href="adminhome.html">Dashboard</a>
-        <a href="usersmanage.html">Users</a>
-        <a href="managevehicles.html">Vehicles</a>
-        <a href="adminBillView.html">Billing</a>
-        <a href="admin_complaints.html">Complaints</a>
+        <a href="admin_home.jsp">Dashboard</a>
+        <a href="user_manage.jsp">Users</a>
+        <a href="manage_vehicles.jsp">Vehicles</a>
+        <a href="admin_bill_view.jsp">Billing</a>
+        <a href="admin_complaints.jsp">Complaints</a>
       </div>
       <div class="col-md-10 content">
         <h2 class="mb-4">Complaints List</h2>

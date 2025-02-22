@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -110,8 +112,8 @@
     <!-- Sidebar -->
     <div id="sidebar">
       <h5>Menu</h5>
-      <a href="EmployeeHome.html">Dashboard</a>
-      <a href="BillMake.html">Manage Bookings</a>
+      <a href="employee_home.jsp">Dashboard</a>
+      <a href="bill_make.jsp">Manage Bookings</a>
       <a href="#">Reports</a>
       <a href="LogoutServlet">Exit</a>
     </div>
@@ -127,7 +129,7 @@
         <h4>Pending Bookings</h4>
         <p>No bookings found.</p>
       </div>
-      <a id="goToBillPage" href="BillMake.html" class="btn btn-primary">Generate Bill</a>
+      <a id="goToBillPage" href="bill_make.jsp" class="btn btn-primary">Generate Bill</a>
     </div>
   </div>
 

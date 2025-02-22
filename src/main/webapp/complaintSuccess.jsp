@@ -35,7 +35,7 @@
 <body>
    <div class="container mt-5">
       <h2>Your complaint has been submitted successfully!</h2>
-      <a href="CusComplaint.html" class="btn btn-primary mt-3">Submit Another Complaint</a>
+      <a href="cus_complaint.jsp" class="btn btn-primary mt-3">Submit Another Complaint</a>
    </div>
 </body>
 </html>

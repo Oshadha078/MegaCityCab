@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,108 +11,110 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
   <style>
-    /* Global Styles */
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f8f9fa;
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.3s ease, color 0.3s ease;
+  /* Global Styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #fff8e1; /* light yellow background */
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  /* Upper Navbar Styles */
+  .navbar-brand {
+    font-weight: bold;
+  }
+  .navbar-nav .nav-link {
+    font-size: 1rem;
+    margin-right: 1rem;
+    color: #333; /* dark text for contrast */
+  }
+  /* Side Navbar Styles */
+  #sidebar {
+    min-width: 200px;
+    max-width: 250px;
+    background-color: #FFD700; /* bright yellow */
+    min-height: 100vh;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  #sidebar .nav-link {
+    color: #333; /* dark text */
+    padding: 0.75rem 1rem;
+  }
+  #sidebar .nav-link:hover {
+    background-color: #FFB300; /* amber hover effect */
+  }
+  #sidebar .sidebar-heading {
+    color: #333;
+    padding: 1rem;
+    font-size: 1.2rem;
+    text-align: center;
+    border-bottom: 1px solid #FFB300;
+  }
+  /* Main Content Area */
+  .content {
+    margin: 2rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  .container-content {
+    margin-top: 40px;
+  }
+  .table thead {
+    background-color: #FFD700; /* use yellow for table header */
+    color: #333; /* dark text for readability */
+    transition: background-color 0.3s ease;
+  }
+  /* Theme Selector Dropdown */
+  #themeSelector {
+    width: auto;
+    margin-left: 1rem;
+  }
+  /* Dark Mode Overrides */
+  .dark-mode {
+    background-color: #333 !important;
+    color: #fff !important;
+  }
+  .dark-mode .navbar {
+    background-color: #FFB300 !important; /* amber navbar in dark mode */
+  }
+  .dark-mode #sidebar {
+    background-color: #FFB300 !important;
+  }
+  .dark-mode .content,
+  .dark-mode .table thead {
+    background-color: #444 !important;
+    color: #fff !important;
+  }
+  /* Night Mode Overrides */
+  .night-mode {
+    background-color: #1c1c1c !important;
+    color: #e0e0e0 !important;
+  }
+  .night-mode .navbar {
+    background-color: #FFB300 !important;
+  }
+  .night-mode #sidebar {
+    background-color: #FFB300 !important;
+  }
+  .night-mode .content,
+  .night-mode .table thead {
+    background-color: #2c2c2c !important;
+    color: #e0e0e0 !important;
+  }
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .d-flex {
+      flex-direction: column;
     }
-    /* Upper Navbar Styles */
-    .navbar-brand {
-      font-weight: bold;
-    }
-    .navbar-nav .nav-link {
-      font-size: 1rem;
-      margin-right: 1rem;
-    }
-    /* Side Navbar Styles */
     #sidebar {
-      min-width: 200px;
-      max-width: 250px;
-      background-color: #343a40;
-      min-height: 100vh;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      max-width: 100%;
+      min-height: auto;
     }
-    #sidebar .nav-link {
-      color: #fff;
-      padding: 0.75rem 1rem;
-    }
-    #sidebar .nav-link:hover {
-      background-color: #495057;
-    }
-    #sidebar .sidebar-heading {
-      color: #fff;
-      padding: 1rem;
-      font-size: 1.2rem;
-      text-align: center;
-      border-bottom: 1px solid #495057;
-    }
-    /* Main Content Area */
     .content {
-      margin: 2rem;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      margin: 1rem;
     }
-    .container-content {
-      margin-top: 40px;
-    }
-    .table thead {
-      background-color: #0d6efd;
-      color: #fff;
-      transition: background-color 0.3s ease;
-    }
-    /* Theme Selector Dropdown */
-    #themeSelector {
-      width: auto;
-      margin-left: 1rem;
-    }
-    /* Dark Mode Overrides */
-    .dark-mode {
-      background-color: #343a40 !important;
-      color: #f8f9fa !important;
-    }
-    .dark-mode .navbar {
-      background-color: #495057 !important;
-    }
-    .dark-mode #sidebar {
-      background-color: #495057 !important;
-    }
-    .dark-mode .content,
-    .dark-mode .table thead {
-      background-color: #3a3a3a !important;
-      color: #f8f9fa !important;
-    }
-    /* Night Mode Overrides */
-    .night-mode {
-      background-color: #121212 !important;
-      color: #e0e0e0 !important;
-    }
-    .night-mode .navbar {
-      background-color: #1c1c1c !important;
-    }
-    .night-mode #sidebar {
-      background-color: #1c1c1c !important;
-    }
-    .night-mode .content,
-    .night-mode .table thead {
-      background-color: #1f1f1f !important;
-      color: #e0e0e0 !important;
-    }
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .d-flex {
-        flex-direction: column;
-      }
-      #sidebar {
-        max-width: 100%;
-        min-height: auto;
-      }
-      .content {
-        margin: 1rem;
-      }
-    }
-  </style>
+  }
+</style>
+
 </head>
 <body onload="initializePage();">
   
@@ -141,10 +145,10 @@
           <a class="nav-link" href="#">Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="cusbooking.html">Manage Bookings</a>
+          <a class="nav-link" href="cus_booking.jsp">Manage Bookings</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="BillInfo.html">Bill Information</a>
+          <a class="nav-link" href="bill_info.jsp">Bill Information</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="LogoutServlet">Exit</a>
@@ -210,14 +214,14 @@
           }
           bills.forEach(bill => {
             // The JSON keys will match those defined by your server-side serialization.
-            const row = `
-              <tr>
-                <td>${bill.id}</td>
-                <td>${bill.employee_name}</td>
-                <td>$${parseFloat(bill.amount).toFixed(2)}</td>
-                <td>${bill.bill_date}</td>
-              </tr>
-            `;
+           const row = `
+				  <tr>
+				    <td>\${bill.id}</td>
+				    <td>\${bill.employee_name}</td>
+				    <td>$\${parseFloat(bill.amount).toFixed(2)}</td>
+				    <td>\${bill.bill_date}</td>
+				  </tr>
+				`;
             tableBody.innerHTML += row;
           });
         })

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,121 +11,125 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   
   <style>
-    /* Global Styles */
-    body {
-      background-color: #f8f9fa;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.3s ease, color 0.3s ease;
+  /* Global Styles */
+  body {
+    background-color: #fff8e1; /* light yellow background */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Top Navbar Styles */
+  .navbar {
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: #FFD700; /* taxi yellow */
+  }
+  .navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #333; /* dark text for contrast */
+  }
+  .navbar-nav .nav-link {
+    font-size: 1.1rem;
+    margin-right: 1rem;
+    color: #333; /* dark text */
+  }
+  
+  /* Sidebar Styles */
+  #sidebar {
+    background-color: #FFD700; /* taxi yellow */
+    color: #333; /* dark text */
+    min-height: 100vh;
+    padding: 1.5rem 1rem;
+    transition: background-color 0.3s ease;
+  }
+  #sidebar h5 {
+    border-bottom: 1px solid #FFC107; /* slightly darker yellow for border */
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  #sidebar a {
+    color: #333;
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+  }
+  #sidebar a:hover {
+    background-color: #FFC107; /* hover effect */
+    padding-left: 10px;
+  }
+  
+  /* Container and Content Area */
+  .content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Table Styles */
+  table {
+    width: 100%;
+    margin-top: 20px;
+  }
+  th, td {
+    text-align: center;
+  }
+  
+  /* Night Mode Overrides */
+  .night-mode {
+    background-color: #121212 !important;
+    color: #e0e0e0 !important;
+  }
+  .night-mode .container, .night-mode .content {
+    background-color: #1f1f1f !important;
+    color: #e0e0e0 !important;
+  }
+  .night-mode table thead {
+    background-color: #1c1c1c !important;
+    color: #e0e0e0 !important;
+  }
+  
+  /* Dark Mode Overrides */
+  .dark-mode {
+    background-color: #343a40 !important;
+    color: #f8f9fa !important;
+  }
+  .dark-mode .container, .dark-mode .content {
+    background-color: #3a3a3a !important;
+    color: #f8f9fa !important;
+  }
+  .dark-mode table thead {
+    background-color: #495057 !important;
+    color: #f8f9fa !important;
+  }
+  
+  /* Theme Selector Dropdown */
+  #themeSelector {
+    width: auto;
+    margin-left: 1rem;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .d-flex {
+      flex-direction: column;
     }
-    
-    /* Top Navbar Styles */
-    .navbar {
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    }
-    .navbar-brand {
-      font-weight: bold;
-      font-size: 1.5rem;
-    }
-    .navbar-nav .nav-link {
-      font-size: 1.1rem;
-      margin-right: 1rem;
-    }
-    
-    /* Sidebar Styles */
     #sidebar {
-      background-color: #343a40;
-      color: #fff;
-      min-height: 100vh;
-      padding: 1.5rem 1rem;
-      transition: background-color 0.3s ease;
+      min-height: auto;
     }
-    #sidebar h5 {
-      border-bottom: 1px solid #495057;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    #sidebar a {
-      color: #fff;
-      text-decoration: none;
-      display: block;
-      padding: 0.5rem;
-      border-radius: 4px;
-      margin-bottom: 0.5rem;
-      transition: background-color 0.3s ease, padding-left 0.3s ease;
-    }
-    #sidebar a:hover {
-      background-color: #495057;
-      padding-left: 10px;
-    }
-
-    /* Container and Content Area */
     .content {
-      background-color: white;
-      padding: 20px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-      margin-top: 20px;
-      transition: background-color 0.3s ease, color 0.3s ease;
+      margin: 1rem;
     }
-    
-    /* Table Styles */
-    table {
-      width: 100%;
-      margin-top: 20px;
-    }
-    th, td {
-      text-align: center;
-    }
-    
-    /* Night Mode Overrides */
-    .night-mode {
-      background-color: #121212 !important;
-      color: #e0e0e0 !important;
-    }
-    .night-mode .container, .night-mode .content {
-      background-color: #1f1f1f !important;
-      color: #e0e0e0 !important;
-    }
-    .night-mode table thead {
-      background-color: #1c1c1c !important;
-      color: #e0e0e0 !important;
-    }
-    
-    /* Dark Mode Overrides */
-    .dark-mode {
-      background-color: #343a40 !important;
-      color: #f8f9fa !important;
-    }
-    .dark-mode .container, .dark-mode .content {
-      background-color: #3a3a3a !important;
-      color: #f8f9fa !important;
-    }
-    .dark-mode table thead {
-      background-color: #495057 !important;
-      color: #f8f9fa !important;
-    }
-    
-    /* Theme Selector Dropdown */
-    #themeSelector {
-      width: auto;
-      margin-left: 1rem;
-    }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .d-flex {
-        flex-direction: column;
-      }
-      #sidebar {
-        min-height: auto;
-      }
-      .content {
-        margin: 1rem;
-      }
-    }
-  </style>
+  }
+</style>
+
 </head>
 <body onload="initializePage()">
   
@@ -138,7 +144,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="EmployeeHome.html">Home</a>
+          <a class="nav-link" href="employee_home.jsp">Home</a>
           <!-- Theme Selector Dropdown -->
           <select id="themeSelector" class="form-select form-select-sm">
             <option value="default">Default</option>
@@ -158,8 +164,8 @@
       <!-- Sidebar Navigation -->
       <div class="col-md-2" id="sidebar">
         <h5>Menu</h5>
-        <a href="EmployeeHome.html">Dashboard</a>
-        <a href="BillMake.html">Manage Bookings</a>
+        <a href="employee_home.jsp">Dashboard</a>
+        <a href="bill_make.jsp">Manage Bookings</a>
         <a href="#">Reports</a>
       </div>
       

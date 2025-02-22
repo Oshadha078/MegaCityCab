@@ -1,26 +1,46 @@
 package com.datapackage.model;
 
+import com.google.gson.annotations.SerializedName; // Optional: Uncomment if you need custom JSON keys
+
+/**
+ * Represents a user (or customer) with registration and login details.
+ */
 public class User {
+    // Fields (JSON keys will match field names by default)
+    // @SerializedName("id") // Uncomment and update if needed
     private int id;
-    private String name;
-    private String usertype;
+    
+    // @SerializedName("nic")
     private String nic;
+    
+    // @SerializedName("name")
+    private String name;
+    
+    // @SerializedName("address")
     private String address;
+    
+    // @SerializedName("contact")
     private String contact;
+    
+    // @SerializedName("password")
     private String password;
+    
+    // @SerializedName("usertype")
+    private String usertype;
 
-    // ✅ Constructor used for login (id, name, usertype)
-    public User(int id, String name, String usertype) {
+    /**
+     * Full constructor for registration.
+     * 
+     * @param id        the user id
+     * @param nic       the NIC (National Identity Card) number
+     * @param name      the user's name
+     * @param address   the user's address
+     * @param contact   the user's contact information
+     * @param password  the user's password
+     * @param usertype  the type of user (admin, user, employee, etc.)
+     */
+    public User(int id, String nic, String name, String address, String contact, String password, String usertype) {
         this.id = id;
-        this.name = name;
-        this.usertype = usertype;
-    }
-
-    // ✅ Default constructor
-    public User() {}
-
-    // ✅ Constructor for registration (all fields)
-    public User(String nic, String name, String address, String contact, String password, String usertype) {
         this.nic = nic;
         this.name = name;
         this.address = address;
@@ -28,21 +48,89 @@ public class User {
         this.password = password;
         this.usertype = usertype;
     }
+    
+    /**
+     * Default constructor.
+     */
+    public User() {}
 
-    // ✅ Getters and Setters
-    public int getId() { return id; }
-    public String getName() { return name; }
-    public String getUsertype() { return usertype; }
-    public String getNic() { return nic; }
-    public String getAddress() { return address; }
-    public String getContact() { return contact; }
-    public String getPassword() { return password; }
-
-    public void setId(int id) { this.id = id; }
-    public void setName(String name) { this.name = name; }
-    public void setUsertype(String usertype) { this.usertype = usertype; }
-    public void setNic(String nic) { this.nic = nic; }
-    public void setAddress(String address) { this.address = address; }
-    public void setContact(String contact) { this.contact = contact; }
-    public void setPassword(String password) { this.password = password; }
+    /**
+     * Overloaded constructor for login (minimal fields).
+     * 
+     * @param id       the user id
+     * @param name     the user's name
+     * @param usertype the type of user
+     */
+    public User(int id, String name, String usertype) {
+        this.id = id;
+        this.name = name;
+        this.usertype = usertype;
+    }
+    
+    // Getters and setters for all fields
+    
+    public int getId() {
+        return id;
+    }
+    
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public String getNic() {
+        return nic;
+    }
+    
+    public void setNic(String nic) {
+        this.nic = nic;
+    }
+    
+    public String getName() {
+        return name;
+    }
+    
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public String getAddress() {
+        return address;
+    }
+    
+    public void setAddress(String address) {
+        this.address = address;
+    }
+    
+    public String getContact() {
+        return contact;
+    }
+    
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    
+    public void setPassword(String password) {
+        this.password = password;
+    }
+    
+    public String getUsertype() {
+        return usertype;
+    }
+    
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
+    }
+    
+    /**
+     * Overridden toString() method for debugging purposes.
+     */
+    @Override
+    public String toString() {
+        return "User [id=" + id + ", nic=" + nic + ", name=" + name + ", address=" + address 
+                + ", contact=" + contact + ", usertype=" + usertype + "]";
+    }
 }

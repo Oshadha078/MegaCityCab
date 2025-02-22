@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,147 +8,151 @@
   <title>Manage Vehicles</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
+  /* Ensure input, textarea, and select text is dark for readability */
+  .form-control {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    color: #333; /* Dark text for contrast */
+  }
+
+  .form-control::placeholder {
+    color: #999; /* Light placeholder text */
+  }
+
+  .form-control:focus {
+    border-color: #FFC107; /* Amber accent */
+    box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+    background-color: #ffffff;
+    color: #333;
+  }
   
-  	/* Ensure input, textarea, and select text is white */
-.form-control {
-  background-color: #2c2c2c;
-  border: 1px solid #444;
-  color: #ffffff; /* Change text color to white */
-}
-
-.form-control::placeholder {
-  color: #bbbbbb; /* Optional: Lighten placeholder text */
-}
-
-.form-control:focus {
-  border-color: #007bff;
-  box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
-  background-color: #2c2c2c;
-  color: #ffffff; /* Ensure white text on focus */
-}
-    /* Global Styles */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
-      margin: 0;
-      padding: 0;
-    }
-    
-    /* Top Navbar Styling */
-    .navbar {
-      background-color: #007bff;
-    }
-    .navbar-brand, .navbar-nav .nav-link {
-      color: #fff !important;
-      font-weight: 500;
-    }
-    
-    /* Sidebar Styling */
+  /* Global Styles */
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #FFF8E1; /* Light yellow background */
+    color: #333; /* Dark text for contrast */
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Top Navbar Styling */
+  .navbar {
+    background-color: #FFD700; /* Taxi yellow */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .navbar-brand, .navbar-nav .nav-link {
+    color: #333 !important;
+    font-weight: 500;
+  }
+  
+  /* Sidebar Styling */
+  .sidebar {
+    background-color: #FFD700; /* Taxi yellow */
+    color: #333;
+    min-height: 100vh;
+    padding-top: 20px;
+  }
+  .sidebar h5 {
+    margin-bottom: 1.5rem;
+  }
+  .sidebar a {
+    color: #333;
+    padding: 10px 15px;
+    display: block;
+    text-decoration: none;
+    transition: background-color 0.3s ease, padding-left 0.3s ease;
+  }
+  .sidebar a:hover {
+    background-color: #FFC107; /* Amber hover effect */
+    padding-left: 20px;
+    text-decoration: none;
+  }
+  
+  /* Main Content Styling */
+  .main-content {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  /* Headings and Alerts */
+  h2.text-center, h4 {
+    border-bottom: 2px solid #FFC107; /* Amber border */
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+  }
+  #alertMessage {
+    margin-top: 20px;
+  }
+  
+  /* Form Styling */
+  form#vehicleForm {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+  }
+  /* (Re)define .form-control for form elements */
+  .form-control {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    color: #333;
+  }
+  .form-control:focus {
+    border-color: #FFC107;
+    box-shadow: 0 0 0 0.2rem rgba(255,193,7,0.25);
+    background-color: #ffffff;
+  }
+  label {
+    font-weight: 500;
+  }
+  
+  /* Table Styling */
+  table.table {
+    background-color: #ffffff;
+    border-collapse: separate;
+    border-spacing: 0;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  }
+  table.table thead {
+    background-color: #FFD700;
+  }
+  table.table th, table.table td {
+    border: 1px solid #ccc;
+    vertical-align: middle;
+    text-align: center;
+  }
+  table.table tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Button Enhancements */
+  .btn {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  .btn:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
     .sidebar {
-      background-color: #343a40;
-      color: #fff;
-      min-height: 100vh;
-      padding-top: 20px;
+      min-height: auto;
+      padding: 15px;
     }
-    .sidebar h5 {
-      margin-bottom: 1.5rem;
-    }
-    .sidebar a {
-      color: #fff;
-      padding: 10px 15px;
-      display: block;
-      text-decoration: none;
-      transition: background-color 0.3s ease, padding-left 0.3s ease;
-    }
-    .sidebar a:hover {
-      background-color: #495057;
-      padding-left: 20px;
-      text-decoration: none;
-    }
-    
-    /* Main Content Styling */
-    .main-content {
-      background-color: #1e1e1e;
-      padding: 30px;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      margin-top: 20px;
-      margin-bottom: 20px;
-    }
-    
-    /* Headings and Alerts */
-    h2.text-center, h4 {
-      border-bottom: 2px solid #007bff;
-      padding-bottom: 10px;
-      margin-bottom: 30px;
-    }
-    #alertMessage {
-      margin-top: 20px;
-    }
-    
-    /* Form Styling */
     form#vehicleForm {
-      background-color: #1e1e1e;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-      margin-bottom: 30px;
+      padding: 15px;
     }
-    .form-control {
-      background-color: #2c2c2c;
-      border: 1px solid #444;
-      color: #e0e0e0;
+    .main-content {
+      margin-top: 10px;
     }
-    .form-control:focus {
-      border-color: #007bff;
-      box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
-      background-color: #2c2c2c;
-    }
-    label {
-      font-weight: 500;
-    }
-    
-    /* Table Styling */
-    table.table {
-      background-color: #1e1e1e;
-      border-collapse: separate;
-      border-spacing: 0;
-      box-shadow: 0 0 15px rgba(0,0,0,0.5);
-    }
-    table.table thead {
-      background-color: #343a40;
-    }
-    table.table th, table.table td {
-      border: 1px solid #444;
-      vertical-align: middle;
-    }
-    table.table tbody tr:hover {
-      background-color: #2c2c2c;
-    }
-    
-    /* Button Enhancements */
-    .btn {
-      transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-    .btn:hover {
-      transform: scale(1.02);
-    }
-    
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .sidebar {
-        min-height: auto;
-        padding: 15px;
-      }
-      form#vehicleForm {
-        padding: 15px;
-      }
-      .main-content {
-        margin-top: 10px;
-      }
-    }
-  </style>
+  }
+</style>
+
   
   <script>
     // Adjust the context path as needed.
@@ -305,7 +311,7 @@
       <div class="collapse navbar-collapse" id="topNavbar">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="Login.html">Logout</a>
+            <a class="nav-link" href="Login.jsp">Logout</a>
           </li>
         </ul>
       </div>
@@ -318,9 +324,9 @@
       <div class="col-md-2 sidebar">
         <h5 class="text-center">Menu</h5>
         <a href="#">Dashboard</a>
-        <a href="usersmanage.html">Users</a>
-        <a href="managevehicles.html">Vehicles</a>
-        <a href="adminBillView.html">Bill Manage</a>
+        <a href="user_manage.jsp">Users</a>
+        <a href="manage_vehicles.jsp">Vehicles</a>
+        <a href="admin_bill_view.jsp">Bill Manage</a>
         <a href="#">Support</a>
       </div>
       

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -86,8 +88,8 @@
       <div class="sidebar-heading text-center">Menu</div>
       <ul class="nav flex-column">
         <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="cusbooking.html">Manage Bookings</a></li>
-        <li class="nav-item"><a class="nav-link" href="BillInfo.html">Bill Information</a></li>
+        <li class="nav-item"><a class="nav-link" href="cus_booking.jsp">Manage Bookings</a></li>
+        <li class="nav-item"><a class="nav-link" href="bill_info.jsp">Bill Information</a></li>
       </ul>
     </div>
     
