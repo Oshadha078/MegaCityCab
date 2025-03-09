@@ -1,0 +1,10 @@
+/* cusnav.css */
+.navbar-brand {
+  font-weight: bold;
+}
+.dark-mode .navbar {
+  background-color: #495057 !important;
+}
+.night-mode .navbar {
+  background-color: #1c1c1c !important;
+}

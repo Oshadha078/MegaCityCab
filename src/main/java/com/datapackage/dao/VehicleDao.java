@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleDao {
-    private static final String DB_URL = "jdbc:mysql://localhost:3306/megacitycab?useSSL=false&serverTimezone=UTC";
-    private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "Mobitel#123";
+	private static final String DB_URL = "jdbc:mysql://localhost:3306/megacitycab";
+	 private static final String DB_USER = "root";
+     private static final String DB_PASSWORD = "root";
 
     static {
         try {
@@ -30,18 +30,19 @@ public class VehicleDao {
     }
 
     public int updateVehicle(Vehicle vehicle) throws SQLException {
-        String sql = "UPDATE vehicles SET price=?, vehicle_name=? WHERE vehicle_no=?";
+        String sql = "UPDATE vehicles SET vehicle_no = ?, vehicle_name = ?, price = ? WHERE id = ?";
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setDouble(1, vehicle.getPrice());
+            ps.setString(1, vehicle.getVehicleNo());
             ps.setString(2, vehicle.getVehicleName());
-            ps.setString(3, vehicle.getVehicleNo());
+            ps.setDouble(3, vehicle.getPrice());
+            ps.setInt(4, vehicle.getId());
             return ps.executeUpdate();
         }
     }
 
     public int deleteVehicle(int id) throws SQLException {
-        String sql = "DELETE FROM vehicles WHERE id=?";
+        String sql = "DELETE FROM vehicles WHERE id = ?";
         try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, id);

@@ -1,24 +1,29 @@
 package com.datapackage.model;
 
-public class Vehicle {
+public class Vehicleprice {
+
     private int id;
     private String vehicleNo;
-    private String vehicleName;
     private double price;
+    private String vehicleName;
     
-    public Vehicle() { }
+    // Default constructor
+    public Vehicleprice() { }
     
-    public Vehicle(int id, String vehicleNo, String vehicleName, double price) {
+    // Parameterized constructor
+    public Vehicleprice(int id, String vehicleNo, double price, String vehicleName) {
         this.id = id;
         this.vehicleNo = vehicleNo;
-        this.vehicleName = vehicleName;
         this.price = price;
+        this.vehicleName = vehicleName;
     }
     
     // Getters and Setters
+    
     public int getId() {
         return id;
     }
+    
     public void setId(int id) {
         this.id = id;
     }
@@ -26,21 +31,24 @@ public class Vehicle {
     public String getVehicleNo() {
         return vehicleNo;
     }
+    
     public void setVehicleNo(String vehicleNo) {
         this.vehicleNo = vehicleNo;
-    }
-    
-    public String getVehicleName() {
-        return vehicleName;
-    }
-    public void setVehicleName(String vehicleName) {
-        this.vehicleName = vehicleName;
     }
     
     public double getPrice() {
         return price;
     }
+    
     public void setPrice(double price) {
         this.price = price;
+    }
+    
+    public String getVehicleName() {
+        return vehicleName;
+    }
+    
+    public void setVehicleName(String vehicleName) {
+        this.vehicleName = vehicleName;
     }
 }

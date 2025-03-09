@@ -7,15 +7,9 @@
   <title>Registration Form</title>
 
   <!-- Bootstrap CSS -->
-  <link
-    rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-  />
-  <!-- jQuery library -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
-  <!-- Popper JS -->
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-  <!-- Bootstrap JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
   <style>
@@ -42,9 +36,9 @@
     /* Glassmorphism container for the form */
     .registration-container {
       width: 500px;
-      background-color: rgba(255, 243, 163, 0.75); /* Semi-transparent yellow */
-      backdrop-filter: blur(10px);                 /* Blur for the glass effect */
-      -webkit-backdrop-filter: blur(10px);         /* Safari support */
+      background-color: rgba(255, 243, 163, 0.75);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
       color: black;
       padding: 20px;
       border-radius: 12px;
@@ -58,12 +52,12 @@
       color: black;
     }
 
-    /* Form controls inside the container */
     .registration-container .form-control {
       background-color: rgba(255, 255, 255, 0.9);
       border: 1px solid black;
       color: black;
     }
+
     .registration-container .form-control:focus {
       background-color: rgba(255, 255, 255, 1);
       color: black;
@@ -71,35 +65,64 @@
       border: 1px solid black;
     }
 
-    /* Button styles */
     .registration-container .btn-success {
-      background-color: rgba(255, 243, 163, 0.75); /* Matching background */
+      background-color: rgba(255, 243, 163, 0.75);
       border: 1px solid rgba(255, 255, 255, 0.2);
       color: black;
-      transition: background-color 0.3s ease, border 0.3s ease;
     }
+
     .registration-container .btn-success:hover {
-      background-color: rgba(255, 243, 163, 1); /* Slightly more solid on hover */
+      background-color: rgba(255, 243, 163, 1);
       border: 1px solid black;
     }
 
-    .registration-container .btn {
-      transition: background-color 0.3s ease;
-      color: black;
-    }
-
-    /* Alert styling for password mismatch */
     #passwordAlert {
       padding: 0.5rem;
       margin-top: 0.5rem;
       color: black;
     }
-</style>
+  </style>
 
- 
+  <script>
+    $(document).ready(function() {
+      $("#password, #confirm_password").on("keyup", function() {
+        const password = $("#password").val();
+        const confirmPassword = $("#confirm_password").val();
+
+        if (password !== confirmPassword) {
+          $("#passwordAlert").removeClass("d-none").text("Passwords do not match!");
+        } else {
+          $("#passwordAlert").addClass("d-none");
+        }
+      });
+
+      $("form").on("submit", function(event) {
+        if ($("#password").val() !== $("#confirm_password").val()) {
+          event.preventDefault();
+          $("#passwordAlert").removeClass("d-none").text("Passwords do not match!");
+        }
+      });
+
+      const urlParams = new URLSearchParams(window.location.search);
+
+      if (urlParams.has("success") && urlParams.get("success") === "true") {
+        $('#successModal').modal('show');
+      }
+
+      if (urlParams.has("error")) {
+        const errorMessages = {
+          driver: "Database driver not found!",
+          insert: "Failed to insert record. Please try again.",
+          sql: "Database error occurred.",
+          unknown: "An unknown error occurred."
+        };
+        $("#errorMessage").text(errorMessages[urlParams.get("error")] || "An error occurred during registration.");
+        $('#errorModal').modal('show');
+      }
+    });
+  </script>
 </head>
 <body>
-  <!-- Centered registration form -->
   <div class="d-flex-center">
     <div class="registration-container">
       <h2>Registration Form</h2>
@@ -127,16 +150,56 @@
         <div class="form-group">
           <label>Re-enter Password:</label>
           <input type="password" id="confirm_password" class="form-control" required />
-          <div id="passwordAlert" class="alert alert-danger mt-2 d-none"></div>
+          <div id="passwordAlert" class="alert alert-danger d-none"></div>
         </div>
         <div class="text-center">
           <input type="submit" value="Register" class="btn btn-success" />
-          <button type="button" onclick="window.location.href='Login.html'" class="btn btn-light">
-            Login
-          </button>
+          <button type="button" onclick="window.location.href='Login.jsp'" class="btn btn-light">Login</button>
         </div>
       </form>
     </div>
   </div>
+
+  <!-- Success Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+          <h5 class="modal-title">Registration Successful</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">You have been successfully registered!</div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Error Modal -->
+  <div class="modal fade" id="errorModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header bg-danger text-white">
+          <h5 class="modal-title">Registration Failed</h5>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        <div class="modal-body">
+          <p id="errorMessage">An error occurred during registration.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">OK</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 20px 0; margin-top: 20px;">
+    <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
+    <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
+    <p style="margin: 5px 0; text-align: center; font-size: 0.9rem;">
+      Email: info@megacitycab.com, support@megacitycab.com | Phone: +1-555-123-4567, +1-555-765-4321
+    </p>
+  </footer>
 </body>
 </html>

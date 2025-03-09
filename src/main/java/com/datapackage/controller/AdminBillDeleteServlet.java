@@ -34,6 +34,7 @@ public class AdminBillDeleteServlet extends HttpServlet {
             e.printStackTrace();
         }
         
+        // Redirect to the JSON servlet so the AJAX call can reload data.
         response.sendRedirect("AdminBillJsonServlet");
     }
     

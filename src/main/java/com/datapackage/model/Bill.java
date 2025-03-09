@@ -32,33 +32,73 @@ public class Bill {
     }
 
     // Getters and Setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() { 
+        return id; 
+    }
+    public void setId(int id) { 
+        this.id = id; 
+    }
 
-    public String getEmployeeName() { return employeeName; }
-    public void setEmployeeName(String employeeName) { this.employeeName = employeeName; }
+    public String getEmployeeName() { 
+        return employeeName; 
+    }
+    public void setEmployeeName(String employeeName) { 
+        this.employeeName = employeeName; 
+    }
 
-    public int getEmployeeId() { return employeeId; }
-    public void setEmployeeId(int employeeId) { this.employeeId = employeeId; }
+    public int getEmployeeId() { 
+        return employeeId; 
+    }
+    public void setEmployeeId(int employeeId) { 
+        this.employeeId = employeeId; 
+    }
 
-    public int getBookingId() { return bookingId; }
-    public void setBookingId(int bookingId) { this.bookingId = bookingId; }
+    public int getBookingId() { 
+        return bookingId; 
+    }
+    public void setBookingId(int bookingId) { 
+        this.bookingId = bookingId; 
+    }
 
-    public int getCustomerId() { return customerId; }
-    public void setCustomerId(int customerId) { this.customerId = customerId; }
+    public int getCustomerId() { 
+        return customerId; 
+    }
+    public void setCustomerId(int customerId) { 
+        this.customerId = customerId; 
+    }
 
-    public String getVehicle() { return vehicle; }
-    public void setVehicle(String vehicle) { this.vehicle = vehicle; }
+    public String getVehicle() { 
+        return vehicle; 
+    }
+    public void setVehicle(String vehicle) { 
+        this.vehicle = vehicle; 
+    }
 
-    public double getKilometers() { return kilometers; }
-    public void setKilometers(double kilometers) { this.kilometers = kilometers; }
+    public double getKilometers() { 
+        return kilometers; 
+    }
+    public void setKilometers(double kilometers) { 
+        this.kilometers = kilometers; 
+    }
 
-    public double getPerKmRate() { return perKmRate; }
-    public void setPerKmRate(double perKmRate) { this.perKmRate = perKmRate; }
+    public double getPerKmRate() { 
+        return perKmRate; 
+    }
+    public void setPerKmRate(double perKmRate) { 
+        this.perKmRate = perKmRate; 
+    }
 
-    public double getAmount() { return amount; }
-    public void setAmount(double amount) { this.amount = amount; }
+    public double getAmount() { 
+        return amount; 
+    }
+    public void setAmount(double amount) { 
+        this.amount = amount; 
+    }
 
-    public Date getBillDate() { return billDate; }
-    public void setBillDate(Date billDate) { this.billDate = billDate; }
+    public Date getBillDate() { 
+        return billDate; 
+    }
+    public void setBillDate(Date billDate) { 
+        this.billDate = billDate; 
+    }
 }

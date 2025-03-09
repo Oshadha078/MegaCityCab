@@ -13,7 +13,7 @@ public class UserDao {
     
     private static final String DB_URL = "jdbc:mysql://localhost:3306/megacitycab";
     private static final String DB_USER = "root";
-    private static final String DB_PASSWORD = "Mobitel#123";
+    private static final String DB_PASSWORD = "root";
 
     public User validateUser(String username, String password, String usertype) {
         User user = null;

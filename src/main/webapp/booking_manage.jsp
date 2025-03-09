@@ -1,16 +1,15 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cab Booking Service</title>
+    <title>Vehicle Booking Management</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
         body {
             background-color: #fff3cd;
+            font-family: Arial, sans-serif;
         }
         .navbar {
             background-color: #ffcc00;
@@ -19,31 +18,13 @@
             color: #000 !important;
             font-weight: bold;
         }
-        .vehicle-card {
-            transition: transform 0.2s;
-            background-color: #fff;
-            border: 2px solid #ffcc00;
-        }
-        .vehicle-card:hover {
-            transform: scale(1.05);
-        }
-        .btn-primary {
+        .btn-primary, .btn-success {
             background-color: #ffcc00;
             border-color: #ffcc00;
             color: black;
             font-weight: bold;
         }
-        .btn-primary:hover {
-            background-color: #e6b800;
-            border-color: #e6b800;
-        }
-        .btn-success {
-            background-color: #ffcc00;
-            border-color: #ffcc00;
-            color: black;
-            font-weight: bold;
-        }
-        .btn-success:hover {
+        .btn-primary:hover, .btn-success:hover {
             background-color: #e6b800;
             border-color: #e6b800;
         }
@@ -54,57 +35,32 @@
     </style>
 </head>
 <body>
-    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg">
         <div class="container">
             <a class="navbar-brand" href="#">Cab Booking</a>
-            <!-- Logout Button -->
             <button class="btn btn-danger ms-auto" onclick="logout()">Logout</button>
         </div>
     </nav>
 
     <div class="container mt-4">
-        <h2 class="text-center text-dark">Book Your Ride</h2>
+        <h2 class="text-center">Vehicle Booking Management</h2>
         
         <div class="row mt-4">
-            <!-- Available Vehicles -->
             <div class="col-md-6">
-                <h4 class="text-dark">Available Vehicles</h4>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="card vehicle-card">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Sedan</h5>
-                                <button class="btn btn-primary btn-sm" onclick="bookVehicle('Sedan')">Book</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card vehicle-card">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">SUV</h5>
-                                <button class="btn btn-primary btn-sm" onclick="bookVehicle('SUV')">Book</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card vehicle-card">
-                            <div class="card-body text-center">
-                                <h5 class="card-title">Bike</h5>
-                                <button class="btn btn-primary btn-sm" onclick="bookVehicle('Bike')">Book</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h4>Available Vehicles</h4>
+                <ul class="list-group" id="vehicle-list">
+                    <li class="list-group-item">Car - Sedan <button class="btn btn-primary btn-sm float-end" onclick="bookVehicle('Car - Sedan')">Book</button></li>
+                    <li class="list-group-item">SUV <button class="btn btn-primary btn-sm float-end" onclick="bookVehicle('SUV')">Book</button></li>
+                    <li class="list-group-item">Bike <button class="btn btn-primary btn-sm float-end" onclick="bookVehicle('Bike')">Book</button></li>
+                </ul>
             </div>
-            
-            <!-- Booking Form -->
+
             <div class="col-md-6">
-                <h4 class="text-dark">Book a Ride</h4>
+                <h4>Book a Vehicle</h4>
                 <form id="booking-form">
                     <div class="mb-3">
                         <label for="vehicle" class="form-label">Vehicle</label>
-                        <input type="text" id="vehicle" class="form-control" readonly>
+                        <input type="text" id="vehicle" class="form-control" readonly required>
                     </div>
                     <div class="mb-3">
                         <label for="date" class="form-label">Date & Time</label>
@@ -114,9 +70,8 @@
                 </form>
             </div>
         </div>
-        
-        <!-- User Bookings -->
-        <h4 class="mt-4 text-dark">My Bookings</h4>
+
+        <h4 class="mt-4">My Bookings</h4>
         <table class="table table-bordered" id="booking-table">
             <thead>
                 <tr>
@@ -128,7 +83,15 @@
             <tbody></tbody>
         </table>
     </div>
-    
+
+    <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 20px 0;">
+        <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
+        <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
+        <p style="margin: 5px 0; text-align: center; font-size: 0.9rem;">
+            Email: info@megacitycab.com | Phone: +1-555-123-4567
+        </p>
+    </footer>
+
     <script>
         function bookVehicle(vehicleName) {
             document.getElementById('vehicle').value = vehicleName;
@@ -138,23 +101,32 @@
             event.preventDefault();
             const vehicle = document.getElementById('vehicle').value;
             const date = document.getElementById('date').value;
+
             if (vehicle && date) {
-                const table = document.getElementById('booking-table').getElementsByTagName('tbody')[0];
-                const row = table.insertRow();
-                row.innerHTML = `<td>${vehicle}</td><td>${date}</td><td><button class='btn btn-danger btn-sm' onclick='cancelBooking(this)'>Cancel</button></td>`;
+                const formattedDate = new Date(date).toLocaleString();
+                const tableBody = document.getElementById('booking-table').querySelector('tbody');
+                const newRow = tableBody.insertRow();
+                newRow.innerHTML = `
+                    <td>${vehicle}</td>
+                    <td>${formattedDate}</td>
+                    <td><button class='btn btn-danger btn-sm' onclick='cancelBooking(this)'>Cancel</button></td>
+                `;
                 document.getElementById('booking-form').reset();
+            } else {
+                alert('Please select a vehicle and date.');
             }
         });
-        
+
         function cancelBooking(button) {
             const row = button.closest('tr');
-            row.remove();
+            if (confirm('Are you sure you want to cancel this booking?')) {
+                row.remove();
+            }
         }
 
         function logout() {
-            // Logic for logging out (redirecting, clearing session, etc.)
             alert('Logging out...');
-            window.location.href = '/login'; // Example of redirection
+            window.location.href = '/Login';
         }
     </script>
 </body>

@@ -15,7 +15,7 @@ import java.util.List;
 
 @WebServlet("/ManageVehicleServlet")
 @MultipartConfig
-public class ManageVehiclesServlet extends HttpServlet {
+public class ManageVehicleServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final Gson gson = new Gson();
     private final VehicleDao vehicleDao = new VehicleDao();
@@ -37,6 +37,7 @@ public class ManageVehiclesServlet extends HttpServlet {
                 rowsAffected = vehicleDao.createVehicle(vehicle);
             } else if ("updateVehicle".equals(action)) {
                 Vehicle vehicle = new Vehicle();
+                vehicle.setId(Integer.parseInt(request.getParameter("id")));
                 vehicle.setVehicleNo(request.getParameter("vehicle_no"));
                 vehicle.setVehicleName(request.getParameter("vehicle_name"));
                 vehicle.setPrice(Double.parseDouble(request.getParameter("price")));

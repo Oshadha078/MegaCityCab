@@ -63,13 +63,13 @@ public class LoginServlet extends HttpServlet {
         String contextPath = request.getContextPath();
         switch (usertype.toLowerCase()) {
             case "admin":
-                response.sendRedirect(contextPath + "/adminhome.html");
+                response.sendRedirect(contextPath + "/admin_home.jsp");
                 break;
             case "employee":
-                response.sendRedirect(contextPath + "/EmployeeHome.html");
+                response.sendRedirect(contextPath + "/employee_home.jsp");
                 break;
             default:
-                response.sendRedirect(contextPath + "/CustomerHome.html");
+                response.sendRedirect(contextPath + "/customer_home.jsp");
                 break;
         }
     }

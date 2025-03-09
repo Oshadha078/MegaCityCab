@@ -1,76 +1,101 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Customer Home</title>
+  <title>Customer Home - Mega City Cab</title>
   
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <!-- Bootstrap & Font Awesome -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
 
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #fff3cd;
+      background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4xGi1v2KLSf4imMMjXvSWmsAMeC80r8ozAQ&s==');
+      background-size: cover;
+      background-position: center;
       margin: 0;
       padding: 0;
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
+
     .navbar {
-      background-color: #ffcc00;
-      border-bottom: 3px solid black;
-    }
-    .navbar-brand, .nav-link {
-      color: #000 !important;
-      font-weight: bold;
-    }
-    .d-flex .btn {
-      background-color: black;
-      color: white;
-      font-weight: bold;
-    }
-    #sidebar {
-      min-width: 250px;
-      max-width: 300px;
-      background-color: #ffcc00;
-      min-height: 100vh;
+      background-color:#fae050;
       padding: 1rem;
     }
-    #sidebar .nav-link {
-      color: #000;
+   
+	
+	.navbar .navbar-brand, 
+	.navbar .nav-link {
+	  color: #000 !important; /* Black text color */
+	  font-weight: bold;
+	}
+	
+	.navbar .nav-link:hover {
+	  color: #333 !important; /* Darker black on hover */
+	}
+
+    .navbar-brand {
+      font-weight: bold;
+      color: #fff !important;
+    }
+
+    .btn-logout {
+      background-color: #dc3545;
+      color: #fff;
       font-weight: bold;
     }
-    #sidebar .nav-link:hover {
-      background-color: #e6b800;
-    }
+
+	    #sidebar {
+	  min-width: 200px;
+	  max-width: 250px;
+	  background-color: #fae050; /* Yellow background */
+	  min-height: 100vh;
+	}
+	
+	#sidebar .nav-link {
+	  color: #000; /* Black text color */
+	  font-weight: bold;
+	}
+	
+	#sidebar .nav-link:hover, .nav-link.active {
+	  background-color: #e0c040; /* Slightly darker yellow for hover */
+	  color: #000; /* Maintain black text color on hover and active */
+	}
+
+
     .content {
-      margin: 2rem;
+      flex: 1;
+      padding: 2rem;
     }
-    .help-box {
-      background: #fff;
-      padding: 15px;
+
+    .background-box, .help-box {
+      background-color: rgba(255, 255, 255, 0.9);
       border-radius: 10px;
-      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
     }
+
     .dark-mode {
       background-color: #343a40 !important;
-      color: #ffffff !important;
+      color: #f8f9fa !important;
     }
-    .dark-mode .navbar {
-      background-color: #495057 !important;
-    }
+
     .dark-mode #sidebar {
       background-color: #495057 !important;
     }
-    .dark-mode .content,
-    .dark-mode .help-box {
+
+    .dark-mode .content, .dark-mode .background-box, .dark-mode .help-box {
       background-color: #3a3a3a !important;
-      color: #ffffff !important;
+      color: #f8f9fa !important;
     }
-    .dark-mode * {
-      color: #ffffff !important;
+
+    #themeSelector {
+      margin-left: 1rem;
+      padding: 0.3rem;
+      border-radius: 0.2rem;
     }
   </style>
 </head>
@@ -78,9 +103,9 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Customer Dashboard</a>
+      <a class="navbar-brand" href="#"><i class="fas fa-user-circle"></i> Customer Dashboard</a>
       <div class="d-flex">
-        <a class="btn btn-outline-dark mr-2" href="LogoutServlet">Logout</a>
+        <a href="LogoutServlet" class="btn btn-logout mr-2"><i class="fas fa-sign-out-alt"></i> Logout</a>
         <select id="themeSelector" class="custom-select">
           <option value="default">Default</option>
           <option value="dark">Dark Mode</option>
@@ -92,47 +117,55 @@
   <div class="d-flex">
     <!-- Sidebar -->
     <div id="sidebar">
-      <div class="sidebar-heading text-center">Menu</div>
+      <div class="sidebar-heading text-center mt-3">Menu</div>
       <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
-        <li class="nav-item"><a class="nav-link" href="cus_booking.jsp">Manage Bookings</a></li>
-        <li class="nav-item"><a class="nav-link" href="bill_info.jsp">Bill Information</a></li>
-        <li class="nav-item"><a class="nav-link" href="cus_complaint.jsp">Complaint</a></li>
+        <li class="nav-item"><a class="nav-link" href="customer_home.jsp"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="cus_booking.jsp"><i class="fas fa-calendar-alt"></i> Manage Bookings</a></li>
+        <li class="nav-item"><a class="nav-link" href="bill_info.jsp"><i class="fas fa-file-invoice-dollar"></i> Bill Information</a></li>
+        <li class="nav-item"><a class="nav-link" href="cus_complaint.jsp"><i class="fas fa-exclamation-circle"></i> Complaint</a></li>
+        <li class="nav-item"><a class="nav-link" href="aboutus.jsp"><i class="fas fa-info-circle"></i> About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="helpandsupport.jsp"><i class="fas fa-exclamation-circle"></i> Help & Support</a></li>
+        <li class="nav-item"><a class="nav-link" href="LogoutServlet"><i class="fas fa-door-open"></i> Exit</a></li>
       </ul>
     </div>
 
     <!-- Main Content -->
     <div class="content">
-      <h2 class="text-dark">Welcome, <span id="usernameDisplay"></span>!</h2>
-      <hr />
-
-      <div class="mb-3">
-        <strong>User ID:</strong> <span id="userIDDisplay">N/A</span>
-      </div>
-      <div class="mb-3">
-        <strong>Address:</strong> <span id="addressDisplay">Not Available</span>
-      </div>
-      <div class="mb-3">
-        <strong>Contact No:</strong> <span id="contactDisplay">Not Available</span>
+      <div class="background-box">
+        <h2 class="text-primary">Welcome, <span id="usernameDisplay">Guest</span>!</h2>
+        <hr>
+        <p><strong>User ID:</strong> <span id="userIDDisplay">N/A</span></p>
+       
       </div>
 
       <div class="help-box">
-        <h4 class="text-dark">User Help Manual</h4>
-        <p class="text-muted">
-          Welcome to your home page. Here you can manage bookings, check bill information, and navigate easily.
-        </p>
+        <h4 class="text-success">User Help Manual</h4>
+        <p>Navigate the system effortlessly with this guide:</p>
+        <ul>
+          <li><strong>Manage Bookings:</strong> Schedule, view, or cancel bookings with ease.</li>
+          <li><strong>View Bill Information:</strong> Access detailed invoices and billing history.</li>
+          <li><strong>Submit Complaints:</strong> Report any issues and track admin responses.</li>
+          <li><strong>Explore About Us:</strong> Learn more about Mega City Cab services.</li>
+        </ul>
       </div>
     </div>
   </div>
 
+  <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 20px; text-align: center;">
+    <p>&copy; 2023 MegaCityCab. All rights reserved.</p>
+    <p>Email: info@megacitycab.com | Phone: +1-555-123-4567</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
   <script>
     function getCookie(name) {
-      let cookies = document.cookie.split(";");
-      for (let i = 0; i < cookies.length; i++) {
-        let cookie = cookies[i].trim();
-        if (cookie.startsWith(name + "=")) {
-          return decodeURIComponent(cookie.substring(name.length + 1));
-        }
+      const cookies = document.cookie.split(";");
+      for (const cookie of cookies) {
+        const [key, value] = cookie.trim().split("=");
+        if (key === name) return decodeURIComponent(value);
       }
       return "";
     }
@@ -143,17 +176,10 @@
       document.getElementById("addressDisplay").textContent = getCookie("address") || "Not Available";
       document.getElementById("contactDisplay").textContent = getCookie("contact") || "Not Available";
 
-      const themeSelector = document.getElementById("themeSelector");
-      themeSelector.addEventListener("change", function() {
-        document.body.classList.remove("dark-mode");
-        if (this.value === "dark") {
-          document.body.classList.add("dark-mode");
-        }
+      document.getElementById("themeSelector").addEventListener("change", function() {
+        document.body.classList.toggle("dark-mode", this.value === "dark");
       });
     });
   </script>
-
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
