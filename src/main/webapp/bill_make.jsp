@@ -98,7 +98,7 @@
         <h5><i class="fas fa-bars"></i> Menu</h5>
         <a href="employee_home.jsp"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
         <a href="bill_make.jsp"><i class="fas fa-calendar-check"></i> Manage Bookings</a>
-        <a href="LogoutServlet"><i class="fas fa-sign-out-alt"></i> Exit</a>
+        <a href="Login.jsp"><i class="fas fa-sign-out-alt"></i> Exit</a>
       </div>
       
       <!-- Content Area -->
@@ -190,23 +190,19 @@
     <p>Email: info@megacitycab.com, support@megacitycab.com | Phone: +1-555-123-4567, +1-555-765-4321</p>
   </footer>
   
-  <script>
+<script>
     // Utility: Get a query parameter from URL
     function getQueryParam(name) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(name) || "";
     }
     
+    // Load employee data and bookings
     function loadEmployeeData() {
-        const empName = sessionStorage.getItem("employeeName") || getQueryParam("name");
-        const empID = sessionStorage.getItem("employeeID") || getQueryParam("id");
-        console.log("Employee Name:", empName);
-        console.log("Employee ID:", empID);
-        document.getElementById("employeeName").value = empName;
-        document.getElementById("employeeID").value = empID;
-        loadBookings();
+      document.getElementById("employeeName").value = sessionStorage.getItem("employeeName") || getQueryParam("name");
+      document.getElementById("employeeID").value = sessionStorage.getItem("employeeID") || getQueryParam("id");
+      loadBookings();
     }
-
     
     // Fetch bookings – assumed structure: bookingId, bookingDate, vehicle, vehicleId, pickupLocation, dropoffLocation, etc.
     function loadBookings() {
@@ -241,39 +237,47 @@
     }
     
     // When a booking is selected, auto-fill the form and fetch the vehicle’s price.
-    function selectBooking(bookingID, customerID, vehicleId, vehicleName) {
-      document.getElementById("bookingID").value = bookingID;
-      document.getElementById("customerID").value = customerID;
-      document.getElementById("vehicle").value = vehicleName;
-      // Fetch the vehicle's rate using its ID
-      fetchVehiclePrice(vehicleId);
-    }
+  function selectBooking(bookingID, customerID, vehicleId, vehicleName) {
+  // Display the booking and vehicle information using the name
+  document.getElementById("bookingID").value = bookingID;
+  document.getElementById("customerID").value = customerID;
+  document.getElementById("vehicle").value = vehicleName;
+  // Fetch the vehicle's rate using its name
+  fetchVehiclePriceByName(vehicleName);
+}
+
     
-    // Fetch the vehicle price from the database via a servlet and update the rate field.
-    function fetchVehiclePrice(vehicleId) {
-      fetch("FetchVehiclePriceServlet?id=" + vehicleId)
-        .then(response => response.text())
-        .then(price => {
-          if (price == null) {
-            console.error("Received null price");
-            return;
-          }
-          const trimmedPrice = price.trim();
-          const numericPrice = parseFloat(trimmedPrice);
-          if (isNaN(numericPrice)) {
-            alert("Invalid price received.");
-            document.getElementById("perKmRate").value = "";
-          } else {
-            document.getElementById("perKmRate").value = numericPrice;
-          }
-          calculateTotal();
-        })
-        .catch(error => {
-          console.error("Error fetching price:", error);
-          document.getElementById("perKmRate").value = "";
-          calculateTotal();
-        });
-    }
+  function fetchVehiclePriceByName(vehicleName) {
+	  // Build the URL using the vehicle name. Use encodeURIComponent to handle spaces or special characters.
+	  fetch("FetchVehiclePriceServlet?name=" + encodeURIComponent(vehicleName))
+	    .then(response => {
+	      if (!response.ok) {
+	        throw new Error("Server responded with " + response.status);
+	      }
+	      return response.text();
+	    })
+	    .then(price => {
+	      if (!price) {
+	        console.error("Received null price");
+	        return;
+	      }
+	      const trimmedPrice = price.trim();
+	      const numericPrice = parseFloat(trimmedPrice);
+	      if (isNaN(numericPrice)) {
+	        alert("Invalid price received.");
+	        document.getElementById("perKmRate").value = "";
+	      } else {
+	        document.getElementById("perKmRate").value = numericPrice;
+	      }
+	      calculateTotal();
+	    })
+	    .catch(error => {
+	      console.error("Error fetching price:", error);
+	      document.getElementById("perKmRate").value = "";
+	      calculateTotal();
+	    });
+	}
+
     
     // Load vehicles for the dropdown (if the user wants to override the fetched rate).
     function loadVehicles() {
