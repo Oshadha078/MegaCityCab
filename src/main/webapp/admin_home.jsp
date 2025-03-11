@@ -345,7 +345,7 @@
       <div class="col-lg-10 col-md-9 main-content">
         <div class="content-header">
           <h2>Welcome, Admin</h2>
-          <p class="text-muted">Overview and summary of your system</p>
+          <p class="text-muted">Welcome to your Admin Dashboard!<br> Here you'll find all the tools you need to manage your system, oversee user activity, and monitor performance. Let's get started and make things happen!</p>
         </div>
         
        
